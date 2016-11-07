@@ -1,2 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+div[data-reactroot]{
+  width: 90%;
+}

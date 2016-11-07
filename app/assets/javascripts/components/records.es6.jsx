@@ -5,11 +5,18 @@ class Records extends React.Component {
     this.state = {records: props.data};
 
     this.addRecord = this.addRecord.bind(this);
-    this.credits = this.credits.bind(this);
+    this.deleteRecord = this.deleteRecord.bind(this);
   }
 
   addRecord(record) {
     newRecords = this.state.records.concat(record);
+    this.setState({records: newRecords});
+  }
+
+  deleteRecord(record) {
+    newRecords = this.state.records.filter((item) => (
+      item.id != record.id
+    ));
     this.setState({records: newRecords});
   }
 
@@ -37,7 +44,11 @@ class Records extends React.Component {
 
   render () {
     const rows = this.state.records.map((object) =>
-      <Record key={object.id} record={object} />
+      <Record
+        key={object.id}
+        record={object}
+        handleDeleteRecord={this.deleteRecord}
+      />
     );
 
     return (
@@ -47,7 +58,6 @@ class Records extends React.Component {
           <AmountBox type='success' amount={this.credits()} text='Credit'/>
           <AmountBox type='danger' amount={this.debits()} text='Debit'/>
           <AmountBox type='info' amount={this.balance()} text='Balance'/>
-          {console.log(this.credits())}
         </div>
         <RecordForm  handleNewRecord={this.addRecord}/>
         <hr></hr>
@@ -57,6 +67,7 @@ class Records extends React.Component {
               <th>Date</th>
               <th>Title</th>
               <th>Amount</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
