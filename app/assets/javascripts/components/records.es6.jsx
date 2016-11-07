@@ -3,6 +3,13 @@ class Records extends React.Component {
   constructor(props) {
     super(props);
     this.state = {records: props.data};
+
+    this.addRecord = this.addRecord.bind(this);
+  }
+
+  addRecord(record) {
+    newRecords = this.state.records.concat(record);
+    this.setState({records: newRecords});
   }
 
   render () {
@@ -11,18 +18,18 @@ class Records extends React.Component {
     );
 
     return (
-      <div>
-        <div>
-          <h2 className='title'>Records</h2>
-        </div>
+      <div className='records'>
+        <h2 className='title'>Records</h2>
+        <RecordForm  handleNewRecord={this.addRecord}/>
+        <hr></hr>
         <table className='table table-bordered'>
-          <thread>
+          <thead>
             <tr>
               <th>Date</th>
               <th>Title</th>
               <th>Amount</th>
             </tr>
-          </thread>
+          </thead>
           <tbody>
             {rows}
           </tbody>
