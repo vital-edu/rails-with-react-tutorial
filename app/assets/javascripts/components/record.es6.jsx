@@ -9,7 +9,7 @@ class Record extends React.Component {
       <tr>
         <td> {this.state.record.date} </td>
         <td> {this.state.record.title} </td>
-        <td> {this.state.record.amount} </td>
+        <td> {amountFormat(this.state.record.amount)} </td>
       </tr>
     );
   }
